@@ -1,0 +1,94 @@
+# Import flask.
+from flask import Flask, request, jsonify
+
+#import json
+#from json import JSONEncoder
+
+# Files' path.
+import os.path
+
+# Save and load files.
+import csv
+import pickle
+#import base64
+
+# Data manipulations.
+import numpy as np
+import pandas as pd
+
+### Imbalanced data management ###
+#from imblearn.pipeline import Pipeline # NB: imbalearn.pipeline.Pipeline allows to properly deal the SMOTE on the train set and avoid the validation/test sets.
+
+
+# Import custom functions.
+from shared_functions import interpretability_shap, obj_to_txt
+
+
+# Tell the program the "app" should be considered as a flask app.
+app = Flask(__name__)
+
+
+# Global files paths and names.
+IMPORTS_DIR_PATH = r'Exports\Preprocessed_data'
+MODEL_DIR_PATH = r'Exports\Models\Selected' 
+PKL_MODEL_FILE = 'selected_model.pkl'
+
+# Load the optimized and trained model.
+MODEL_PL = pickle.load(open(os.path.join(MODEL_DIR_PATH, PKL_MODEL_FILE), "rb"))
+
+# Load the relevant datasets.df_TRAIN.
+df_TRAIN = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_train.csv'))
+df_TEST = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_customers.csv'))
+
+# Set the customer IDs column's values as the dataframe indeces.
+X_TRAIN = df_TRAIN.set_index('SK_ID_CURR')
+X_TEST = df_TEST.set_index('SK_ID_CURR')
+
+# NB: Returning a dictionary seems to auto jisonify it.
+
+@app.route('/api/predictions/<int:customer_id>') #{customer_id}
+def predictions (customer_id=100001.0): #customer_id=100001.0
+    
+    #print('test_api_flask')
+    
+    # Get the arguments of the request received.
+    #customer_id = request.args.get('customer_id')
+    
+    # Prediction for the selected customers.
+    yhat = MODEL_PL.predict_proba(X_TEST.loc[[customer_id]])   
+       
+    # NB: It seems that numpy.array are not jsonable (TypeError: Object of type ndarray is not JSON serializable).
+    #     => yhat is converted to a list to be jsonable and sent to the requester.
+    return {'customer_id': customer_id, 'yhat': yhat.tolist()}
+
+@app.route('/api/interpretations/<int:customer_id>/<int:cat_class>')
+def shap_interpretations (customer_id, cat_class = 0):
+
+    # Get the model and the scaler separately from the pipeline.
+    scaler = MODEL_PL['scaler']
+    model = MODEL_PL['model']
+
+    # Drop the target column in X_TRAIN.
+    X_train = X_TRAIN.drop('TARGET', axis=1)
+
+    # Shap explanations.
+    if customer_id == None: # Global.
+        explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST, cat_class)
+    else: # Local.
+        explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST.loc[[customer_id]], cat_class)
+    
+    # Serialization of the shap explanations object as a string to allow its transfer across APIs.
+    # NB: Step required because impossible to jsonify otherwise.
+    explanations_serialized = obj_to_txt(explanations)
+    
+    return explanations_serialized #{'status': 'ok', 'explanations': explanations} #[explanations] #json.dumps(explanations, cls=to_json)
+
+# NB: Display the root message at the end of the script when everything else happened well until here.
+@app.route('/')
+def api_running ():
+    return 'The flask API server about model predictions and features interpretations is running...'
+
+
+# Launch the flask API.
+if __name__ == "__main__":
+    app.run(debug=True)
