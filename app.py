@@ -1,3 +1,5 @@
+            ### Importation of libraries ###
+
 # Import flask.
 from flask import Flask, request, jsonify
 
@@ -10,7 +12,6 @@ import os.path
 # Save and load files.
 import csv
 import pickle
-#import base64
 
 # Data manipulations.
 import numpy as np
@@ -19,19 +20,32 @@ import pandas as pd
 ### Imbalanced data management ###
 #from imblearn.pipeline import Pipeline # NB: imbalearn.pipeline.Pipeline allows to properly deal the SMOTE on the train set and avoid the validation/test sets.
 
-
 # Import custom functions.
 from shared_functions import interpretability_shap, obj_to_txt
 
 
-# Tell the program the "app" should be considered as a flask app.
+
+
+            ### Initialization of Flask ###
+
+# Tell the program the "app.py" file should be considered as a flask app.
 app = Flask(__name__)
 
 
-# Global files paths and names.
+
+
+            ### Global files paths and names ###
+
 IMPORTS_DIR_PATH = r'Exports\Preprocessed_data'
-MODEL_DIR_PATH = r'Exports\Models\Selected' 
+MODEL_DIR_PATH = r'Exports\Models\Selected'
+SHAP_INTERPRETATIONS_DIR_PATH = r'Exports\Feature_interpretation\SHAP'
+
 PKL_MODEL_FILE = 'selected_model.pkl'
+
+
+
+
+            ### Global variables ###
 
 # Load the optimized and trained model.
 MODEL_PL = pickle.load(open(os.path.join(MODEL_DIR_PATH, PKL_MODEL_FILE), "rb"))
@@ -44,13 +58,20 @@ df_TEST = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_cust
 X_TRAIN = df_TRAIN.set_index('SK_ID_CURR')
 X_TEST = df_TEST.set_index('SK_ID_CURR')
 
+
+
+
+            ### Functions ###
+
 # NB: Returning a dictionary seems to auto jisonify it.
+#       => The use of jsonify(<object_to_return>) seems uncessary. 
 
 @app.route('/api/predictions/<int:customer_id>') #{customer_id}
-def predictions (customer_id=100001.0): #customer_id=100001.0
-    
-    #print('test_api_flask')
-    
+def predictions (customer_id): #customer_id=100001.0
+
+    """ Get and send the model prediction result corresponding to the customer's profile selected or
+        the global explanations made over the dataset received as input. """
+       
     # Get the arguments of the request received.
     #customer_id = request.args.get('customer_id')
     
@@ -64,6 +85,8 @@ def predictions (customer_id=100001.0): #customer_id=100001.0
 @app.route('/api/interpretations/<int:customer_id>/<int:cat_class>')
 def shap_interpretations (customer_id, cat_class = 0):
 
+    """ Get, serialize and send the SHAP explanations corresponding to the customer's profile selected."""
+
     # Get the model and the scaler separately from the pipeline.
     scaler = MODEL_PL['scaler']
     model = MODEL_PL['model']
@@ -72,22 +95,37 @@ def shap_interpretations (customer_id, cat_class = 0):
     X_train = X_TRAIN.drop('TARGET', axis=1)
 
     # Shap explanations.
-    if customer_id == None: # Global.
-        explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST, cat_class)
+    if customer_id == 0: # Global.
+    
+        # Method 1 (longer): Generate SHAP explications at real time.
+        #explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST, cat_class)
+        
+        # Method 2 (Faster): Load an already generated global SHAP explication file.
+        with open(os.path.join(SHAP_INTERPRETATIONS_DIR_PATH, 'global_shap_explanations.pkl'), "rb") as explanations_global_file:
+            explanations = pickle.load(explanations_global_file)
+
     else: # Local.
         explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST.loc[[customer_id]], cat_class)
-    
+       
     # Serialization of the shap explanations object as a string to allow its transfer across APIs.
     # NB: Step required because impossible to jsonify otherwise.
     explanations_serialized = obj_to_txt(explanations)
     
     return explanations_serialized #{'status': 'ok', 'explanations': explanations} #[explanations] #json.dumps(explanations, cls=to_json)
 
+
 # NB: Display the root message at the end of the script when everything else happened well until here.
 @app.route('/')
 def api_running ():
+
+    """ Message to display at the root of the flask server when it is running."""
+
     return 'The flask API server about model predictions and features interpretations is running...'
 
+
+
+
+            ### Launch the flask API service (a server) ###
 
 # Launch the flask API.
 if __name__ == "__main__":
