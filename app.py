@@ -3,9 +3,6 @@
 # Import flask.
 from flask import Flask, request, jsonify
 
-#import json
-#from json import JSONEncoder
-
 # Files' path.
 import os.path
 
@@ -17,9 +14,6 @@ import pickle
 import numpy as np
 import pandas as pd
 
-### Imbalanced data management ###
-#from imblearn.pipeline import Pipeline # NB: imbalearn.pipeline.Pipeline allows to properly deal the SMOTE on the train set and avoid the validation/test sets.
-
 # Import custom functions.
 from shared_functions import interpretability_shap, obj_to_txt
 
@@ -28,7 +22,6 @@ from shared_functions import interpretability_shap, obj_to_txt
 
             ### Initialization of Flask ###
 
-# Tell the program the "app.py" file should be considered as a flask app.
 app = Flask(__name__)
 
 
@@ -36,9 +29,9 @@ app = Flask(__name__)
 
             ### Global files paths and names ###
 
-IMPORTS_DIR_PATH = r'Exports\Preprocessed_data'
-MODEL_DIR_PATH = r'Exports\Models\Selected'
-SHAP_INTERPRETATIONS_DIR_PATH = r'Exports\Feature_interpretation\SHAP'
+IMPORTS_DIR_PATH = r'Exports/Preprocessed_data'
+MODEL_DIR_PATH = r'Exports/Models/Selected'
+SHAP_INTERPRETATIONS_DIR_PATH = r'Exports/Feature_interpretation/SHAP'
 
 PKL_MODEL_FILE = 'selected_model.pkl'
 
@@ -50,7 +43,7 @@ PKL_MODEL_FILE = 'selected_model.pkl'
 # Load the optimized and trained model.
 MODEL_PL = pickle.load(open(os.path.join(MODEL_DIR_PATH, PKL_MODEL_FILE), "rb"))
 
-# Load the relevant datasets.df_TRAIN.
+# Load the relevant datasets.
 df_TRAIN = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_train.csv'))
 df_TEST = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_customers.csv'))
 
@@ -128,5 +121,5 @@ def api_running ():
             ### Launch the flask API service (a server) ###
 
 # Launch the flask API.
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
