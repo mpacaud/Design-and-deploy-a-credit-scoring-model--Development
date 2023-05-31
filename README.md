@@ -56,7 +56,7 @@ Beyond the technical aspects, the transparency of the tool is also characterized
 
 The project was split into two parts:
 
-### Part 1: Development**
+### Part 1: Development
 
 The first part of the project consists of realizing:
 - an exploratory data analysis.
@@ -66,7 +66,7 @@ The first part of the project consists of realizing:
 - simulation of data drift to determine a maintenance period in order to maintain optimal prediction performance.
 - the development of the web application which is divided into 2 sub-parts: one frontend based on streamlit (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Frontend.git) and the other backend based on Flask (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Backend.git).
 
-### Part 2: Deployment**
+### Part 2: Deployment
 
 **Local**
 
