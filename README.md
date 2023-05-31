@@ -81,6 +81,6 @@ The deployment of the script is carried out via the Heroku platform. The applica
 NB1: By clicking on this link, it is possible to log into the backend server: https://git.heroku.com/hidden-savannah-70356.git
 NB2: It seems that the Flask application cannot work on Azure because a package is missing on their linux installation to run the chosen model (LightGBM).
 
-***Warnings***
+## Further Notes
 
 For reasons of server resource management, it is possible that the application is not permanently maintained on the Heroku hosting site.
