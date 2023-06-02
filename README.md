@@ -76,9 +76,9 @@ To launch the application locally, just run:
 
 **On line**
 
-The deployment of the script is carried out via the Heroku platform. The application dashboard can be loaded with the following link: https://git.heroku.com/mysterious-refuge-87297.git
+The deployment of the script is carried out via the Heroku platform. The application dashboard can be loaded with the following link: https://mysterious-refuge-87297.herokuapp.com
 
-NB1: By clicking on this link, it is possible to log into the backend server: https://git.heroku.com/hidden-savannah-70356.git
+NB1: By clicking on this link, it is possible to log into the backend server: https://hidden-savannah-70356.herokuapp.com
 NB2: It seems that the Flask application cannot work on Azure because a package is missing on their linux installation to run the chosen model (LightGBM).
 
 ## Further Notes
