@@ -57,7 +57,7 @@ X_TEST = df_TEST.set_index('SK_ID_CURR')
             ### Functions ###
 
 # NB: Returning a dictionary seems to auto jisonify it.
-#       => The use of jsonify(<object_to_return>) seems uncessary. 
+#       => The use of jsonify(<object_to_return>) seems unnecessary. 
 
 @app.route('/api/predictions/<int:customer_id>') #{customer_id}
 def predictions (customer_id): #customer_id=100001.0
@@ -73,7 +73,7 @@ def predictions (customer_id): #customer_id=100001.0
        
     # NB: It seems that numpy.array are not jsonable (TypeError: Object of type ndarray is not JSON serializable).
     #     => yhat is converted to a list to be jsonable and sent to the requester.
-    return {'customer_id': customer_id, 'yhat': yhat.tolist()}
+    return yhat.tolist()[0]
 
 @app.route('/api/interpretations/<int:customer_id>/<int:cat_class>')
 def shap_interpretations (customer_id, cat_class = 0):
@@ -103,6 +103,8 @@ def shap_interpretations (customer_id, cat_class = 0):
     # Serialization of the shap explanations object as a string to allow its transfer across APIs.
     # NB: Step required because impossible to jsonify otherwise.
     explanations_serialized = obj_to_txt(explanations)
+    
+    print(type(explanations))
     
     return explanations_serialized #{'status': 'ok', 'explanations': explanations} #[explanations] #json.dumps(explanations, cls=to_json)
 

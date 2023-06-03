@@ -37,6 +37,7 @@ import plotly.graph_objects as go
 from shared_functions import txt_to_obj # Serialize SHAP for API transfer.
 
 
+
             ### Global files paths and names ###
             
 # NB!: On windows local host \ or / as path separator does not matter as long as the prefix "r" is present at the beginning.
@@ -52,7 +53,7 @@ PKL_MODELS_SUM_FILE = 'models_info.pkl'
 
             ### Functions ###
 
-@st.cache_data # Store customers data in cache for faster access.
+@st.cache_data() # Store customers data in cache for faster access.
 def load_data ():
 
     """ Load customers data."""
@@ -66,15 +67,15 @@ def get_prediction (customer_id):
     """ Get the model predictions over the observed customer (probability of non payment default) from the predictive API."""
     
     # Set the url and the parameters to get the predictions. 
-    url_api_predictions = API_SERVER_PATH + 'api/predictions/%i' % int(customer_id)
+    url_api_predictions = API_SERVER_PATH + '/api/predictions/%i' % int(customer_id)
     #var_dict = {'customer_id': selected_customer_id}
 
     # Make the request and get the corresponding response in a json format.
     response_pred = requests.get(url_api_predictions)
-       
-    # Extract the result of the prediction and convert it back from list to a np.array format.
-    yhat_customer = np.array(response_pred.json()['yhat'][0])
     
+    # Extract the result of the prediction and convert it back from list to a np.array format.
+    yhat_customer = np.array(response_pred.json())
+  
     return yhat_customer
    
 def get_shap_explanations (customer_id, cat_class = 0):
@@ -83,7 +84,7 @@ def get_shap_explanations (customer_id, cat_class = 0):
         from the SHAP API. """
 
     # Set the url and the required parameters to get the SHAP explanations. 
-    url_api_shap_expl = API_SERVER_PATH + 'api/interpretations/%i/%i' % (int(customer_id), int(cat_class))
+    url_api_shap_expl = API_SERVER_PATH + '/api/interpretations/%i/%i' % (int(customer_id), int(cat_class))
     
     # Make the request and get the corresponding response in a json format.
     response_expl = requests.get(url_api_shap_expl)
