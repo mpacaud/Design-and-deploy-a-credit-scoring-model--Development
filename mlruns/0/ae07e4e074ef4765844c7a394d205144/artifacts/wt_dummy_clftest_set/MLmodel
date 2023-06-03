@@ -1,0 +1,122 @@
+artifact_path: wt_dummy_clftest_set
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.2.2
+mlflow_version: 2.3.1
+model_uuid: 40ef88556f0c490ebe8a049960b8c379
+run_id: ae07e4e074ef4765844c7a394d205144
+signature:
+  inputs: '[{"name": "NAME_CONTRACT_TYPE", "type": "double"}, {"name": "CODE_GENDER",
+    "type": "double"}, {"name": "FLAG_OWN_CAR", "type": "double"}, {"name": "AMT_INCOME_TOTAL",
+    "type": "double"}, {"name": "AMT_CREDIT", "type": "double"}, {"name": "AMT_ANNUITY",
+    "type": "double"}, {"name": "AMT_GOODS_PRICE", "type": "double"}, {"name": "NAME_TYPE_SUITE",
+    "type": "double"}, {"name": "NAME_INCOME_TYPE", "type": "double"}, {"name": "NAME_EDUCATION_TYPE",
+    "type": "double"}, {"name": "NAME_FAMILY_STATUS", "type": "double"}, {"name":
+    "NAME_HOUSING_TYPE", "type": "double"}, {"name": "REGION_POPULATION_RELATIVE",
+    "type": "double"}, {"name": "DAYS_BIRTH", "type": "double"}, {"name": "DAYS_EMPLOYED",
+    "type": "double"}, {"name": "DAYS_REGISTRATION", "type": "double"}, {"name": "DAYS_ID_PUBLISH",
+    "type": "double"}, {"name": "OWN_CAR_AGE", "type": "double"}, {"name": "FLAG_WORK_PHONE",
+    "type": "double"}, {"name": "OCCUPATION_TYPE", "type": "double"}, {"name": "REGION_RATING_CLIENT",
+    "type": "double"}, {"name": "REGION_RATING_CLIENT_W_CITY", "type": "double"},
+    {"name": "WEEKDAY_APPR_PROCESS_START", "type": "double"}, {"name": "LIVE_REGION_NOT_WORK_REGION",
+    "type": "double"}, {"name": "REG_CITY_NOT_LIVE_CITY", "type": "double"}, {"name":
+    "LIVE_CITY_NOT_WORK_CITY", "type": "double"}, {"name": "ORGANIZATION_TYPE", "type":
+    "double"}, {"name": "EXT_SOURCE_1", "type": "double"}, {"name": "EXT_SOURCE_2",
+    "type": "double"}, {"name": "EXT_SOURCE_3", "type": "double"}, {"name": "APARTMENTS_AVG",
+    "type": "double"}, {"name": "ENTRANCES_AVG", "type": "double"}, {"name": "FLOORSMAX_AVG",
+    "type": "double"}, {"name": "LIVINGAREA_AVG", "type": "double"}, {"name": "APARTMENTS_MODE",
+    "type": "double"}, {"name": "FLOORSMAX_MODE", "type": "double"}, {"name": "APARTMENTS_MEDI",
+    "type": "double"}, {"name": "YEARS_BEGINEXPLUATATION_MEDI", "type": "double"},
+    {"name": "ENTRANCES_MEDI", "type": "double"}, {"name": "FLOORSMAX_MEDI", "type":
+    "double"}, {"name": "TOTALAREA_MODE", "type": "double"}, {"name": "WALLSMATERIAL_MODE",
+    "type": "double"}, {"name": "DEF_30_CNT_SOCIAL_CIRCLE", "type": "double"}, {"name":
+    "DEF_60_CNT_SOCIAL_CIRCLE", "type": "double"}, {"name": "DAYS_LAST_PHONE_CHANGE",
+    "type": "double"}, {"name": "FLAG_DOCUMENT_3", "type": "double"}, {"name": "FLAG_DOCUMENT_8",
+    "type": "double"}, {"name": "FLAG_DOCUMENT_18", "type": "double"}, {"name": "AMT_REQ_CREDIT_BUREAU_HOUR",
+    "type": "double"}, {"name": "AMT_REQ_CREDIT_BUREAU_WEEK", "type": "double"}, {"name":
+    "AMT_REQ_CREDIT_BUREAU_QRT", "type": "double"}, {"name": "DOCUMENT_COUNT", "type":
+    "double"}, {"name": "NEW_DOC_KURT", "type": "double"}, {"name": "AGE_RANGE", "type":
+    "double"}, {"name": "EXT_SOURCES_PROD", "type": "double"}, {"name": "EXT_SOURCES_WEIGHTED",
+    "type": "double"}, {"name": "EXT_SOURCES_MIN", "type": "double"}, {"name": "EXT_SOURCES_MAX",
+    "type": "double"}, {"name": "EXT_SOURCES_MEAN", "type": "double"}, {"name": "EXT_SOURCES_NANMEDIAN",
+    "type": "double"}, {"name": "EXT_SOURCES_VAR", "type": "double"}, {"name": "CREDIT_TO_ANNUITY_RATIO",
+    "type": "double"}, {"name": "CREDIT_TO_GOODS_RATIO", "type": "double"}, {"name":
+    "ANNUITY_TO_INCOME_RATIO", "type": "double"}, {"name": "CREDIT_TO_INCOME_RATIO",
+    "type": "double"}, {"name": "INCOME_TO_EMPLOYED_RATIO", "type": "double"}, {"name":
+    "INCOME_TO_BIRTH_RATIO", "type": "double"}, {"name": "EMPLOYED_TO_BIRTH_RATIO",
+    "type": "double"}, {"name": "ID_TO_BIRTH_RATIO", "type": "double"}, {"name": "CAR_TO_BIRTH_RATIO",
+    "type": "double"}, {"name": "CAR_TO_EMPLOYED_RATIO", "type": "double"}, {"name":
+    "PHONE_TO_BIRTH_RATIO", "type": "double"}, {"name": "GROUP_EXT_SOURCES_MEDIAN",
+    "type": "double"}, {"name": "GROUP_EXT_SOURCES_STD", "type": "double"}, {"name":
+    "GROUP_INCOME_MEAN", "type": "double"}, {"name": "GROUP_INCOME_STD", "type": "double"},
+    {"name": "GROUP_CREDIT_TO_ANNUITY_MEAN", "type": "double"}, {"name": "GROUP_CREDIT_TO_ANNUITY_STD",
+    "type": "double"}, {"name": "GROUP_CREDIT_MEAN", "type": "double"}, {"name": "GROUP_ANNUITY_MEAN",
+    "type": "double"}, {"name": "GROUP_ANNUITY_STD", "type": "double"}, {"name": "INS_SK_ID_PREV_SIZE",
+    "type": "double"}, {"name": "INS_SK_ID_PREV_NUNIQUE", "type": "double"}, {"name":
+    "INS_DAYS_ENTRY_PAYMENT_MIN", "type": "double"}, {"name": "INS_DAYS_ENTRY_PAYMENT_MAX",
+    "type": "double"}, {"name": "INS_DAYS_ENTRY_PAYMENT_MEAN", "type": "double"},
+    {"name": "INS_AMT_INSTALMENT_MIN", "type": "double"}, {"name": "INS_AMT_INSTALMENT_MAX",
+    "type": "double"}, {"name": "INS_AMT_INSTALMENT_MEAN", "type": "double"}, {"name":
+    "INS_AMT_INSTALMENT_SUM", "type": "double"}, {"name": "INS_AMT_PAYMENT_MIN", "type":
+    "double"}, {"name": "INS_AMT_PAYMENT_MAX", "type": "double"}, {"name": "INS_AMT_PAYMENT_MEAN",
+    "type": "double"}, {"name": "INS_AMT_PAYMENT_SUM", "type": "double"}, {"name":
+    "INS_DPD_MAX", "type": "double"}, {"name": "INS_DPD_MEAN", "type": "double"},
+    {"name": "INS_DBD_MAX", "type": "double"}, {"name": "INS_DBD_MEAN", "type": "double"},
+    {"name": "INS_PAYMENT_DIFFERENCE_MEAN", "type": "double"}, {"name": "INS_PAYMENT_RATIO_MEAN",
+    "type": "double"}, {"name": "INS_LATE_PAYMENT_MEAN", "type": "double"}, {"name":
+    "INS_LATE_PAYMENT_SUM", "type": "double"}, {"name": "INS_SIGNIFICANT_LATE_PAYMENT_MEAN",
+    "type": "double"}, {"name": "INS_SIGNIFICANT_LATE_PAYMENT_SUM", "type": "double"},
+    {"name": "INS_LATE_PAYMENT_RATIO_MEAN", "type": "double"}, {"name": "INS_DPD_7_MEAN",
+    "type": "double"}, {"name": "INS_DPD_15_MEAN", "type": "double"}, {"name": "INS_PAID_OVER_MEAN",
+    "type": "double"}, {"name": "INS_36M_SK_ID_PREV_SIZE", "type": "double"}, {"name":
+    "INS_36M_DAYS_ENTRY_PAYMENT_MIN", "type": "double"}, {"name": "INS_36M_DAYS_ENTRY_PAYMENT_MAX",
+    "type": "double"}, {"name": "INS_36M_DAYS_ENTRY_PAYMENT_MEAN", "type": "double"},
+    {"name": "INS_36M_AMT_INSTALMENT_MIN", "type": "double"}, {"name": "INS_36M_AMT_INSTALMENT_MAX",
+    "type": "double"}, {"name": "INS_36M_AMT_INSTALMENT_MEAN", "type": "double"},
+    {"name": "INS_36M_AMT_INSTALMENT_SUM", "type": "double"}, {"name": "INS_36M_AMT_PAYMENT_MIN",
+    "type": "double"}, {"name": "INS_36M_AMT_PAYMENT_MAX", "type": "double"}, {"name":
+    "INS_36M_AMT_PAYMENT_MEAN", "type": "double"}, {"name": "INS_36M_AMT_PAYMENT_SUM",
+    "type": "double"}, {"name": "INS_36M_DPD_MAX", "type": "double"}, {"name": "INS_36M_DPD_MEAN",
+    "type": "double"}, {"name": "INS_36M_DBD_MAX", "type": "double"}, {"name": "INS_36M_DBD_MEAN",
+    "type": "double"}, {"name": "INS_36M_PAYMENT_DIFFERENCE_MEAN", "type": "double"},
+    {"name": "INS_36M_PAYMENT_RATIO_MEAN", "type": "double"}, {"name": "INS_36M_LATE_PAYMENT_MEAN",
+    "type": "double"}, {"name": "INS_36M_SIGNIFICANT_LATE_PAYMENT_MEAN", "type": "double"},
+    {"name": "INS_36M_LATE_PAYMENT_RATIO_MEAN", "type": "double"}, {"name": "INS_36M_DPD_7_MEAN",
+    "type": "double"}, {"name": "INS_36M_DPD_15_MEAN", "type": "double"}, {"name":
+    "INS_60M_SK_ID_PREV_SIZE", "type": "double"}, {"name": "INS_60M_DAYS_ENTRY_PAYMENT_MIN",
+    "type": "double"}, {"name": "INS_60M_DAYS_ENTRY_PAYMENT_MAX", "type": "double"},
+    {"name": "INS_60M_DAYS_ENTRY_PAYMENT_MEAN", "type": "double"}, {"name": "INS_60M_AMT_INSTALMENT_MIN",
+    "type": "double"}, {"name": "INS_60M_AMT_INSTALMENT_MAX", "type": "double"}, {"name":
+    "INS_60M_AMT_INSTALMENT_MEAN", "type": "double"}, {"name": "INS_60M_AMT_INSTALMENT_SUM",
+    "type": "double"}, {"name": "INS_60M_AMT_PAYMENT_MIN", "type": "double"}, {"name":
+    "INS_60M_AMT_PAYMENT_MAX", "type": "double"}, {"name": "INS_60M_AMT_PAYMENT_MEAN",
+    "type": "double"}, {"name": "INS_60M_AMT_PAYMENT_SUM", "type": "double"}, {"name":
+    "INS_60M_DPD_MAX", "type": "double"}, {"name": "INS_60M_DPD_MEAN", "type": "double"},
+    {"name": "INS_60M_DBD_MAX", "type": "double"}, {"name": "INS_60M_DBD_MEAN", "type":
+    "double"}, {"name": "INS_60M_PAYMENT_DIFFERENCE_MEAN", "type": "double"}, {"name":
+    "INS_60M_PAYMENT_RATIO_MEAN", "type": "double"}, {"name": "INS_60M_LATE_PAYMENT_MEAN",
+    "type": "double"}, {"name": "INS_60M_SIGNIFICANT_LATE_PAYMENT_MEAN", "type": "double"},
+    {"name": "INS_60M_LATE_PAYMENT_RATIO_MEAN", "type": "double"}, {"name": "INS_60M_DPD_7_MEAN",
+    "type": "double"}, {"name": "INS_60M_DPD_15_MEAN", "type": "double"}, {"name":
+    "LAST_LOAN_DPD_sum", "type": "double"}, {"name": "LAST_LOAN_DPD_mean", "type":
+    "double"}, {"name": "LAST_LOAN_DPD_max", "type": "double"}, {"name": "LAST_LOAN_LATE_PAYMENT_count",
+    "type": "double"}, {"name": "LAST_LOAN_LATE_PAYMENT_mean", "type": "double"},
+    {"name": "LAST_LOAN_PAID_OVER_AMOUNT_sum", "type": "double"}, {"name": "LAST_LOAN_PAID_OVER_AMOUNT_mean",
+    "type": "double"}, {"name": "LAST_LOAN_PAID_OVER_AMOUNT_max", "type": "double"},
+    {"name": "LAST_LOAN_PAID_OVER_AMOUNT_min", "type": "double"}, {"name": "LAST_LOAN_PAID_OVER_count",
+    "type": "double"}, {"name": "LAST_LOAN_PAID_OVER_mean", "type": "double"}, {"name":
+    "PAYMENT_MIN_TO_ANNUITY_RATIO", "type": "double"}, {"name": "PAYMENT_MAX_TO_ANNUITY_RATIO",
+    "type": "double"}, {"name": "PAYMENT_MEAN_TO_ANNUITY_RATIO", "type": "double"}]'
+  outputs: '[{"name": "TARGET", "type": "double"}]'
+utc_time_created: '2023-05-30 13:14:54.153268'

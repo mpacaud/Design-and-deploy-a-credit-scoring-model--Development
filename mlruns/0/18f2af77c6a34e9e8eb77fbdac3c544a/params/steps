@@ -1,1 +1,0 @@
-[('scaler', MinMaxScaler()), ['resampler', SMOTE(random_state=0)], ['model', DummyClassifier(strategy='stratified')]]

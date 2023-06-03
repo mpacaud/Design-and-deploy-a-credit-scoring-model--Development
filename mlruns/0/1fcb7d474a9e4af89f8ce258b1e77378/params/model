@@ -1,0 +1,1 @@
+LogisticRegression(C=1e-05, class_weight='balanced', penalty=None)
