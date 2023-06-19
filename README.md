@@ -54,7 +54,7 @@ Beyond the technical aspects, the transparency of the tool is also characterized
 
 ## Plan
 
-The project was split into two parts:
+The project have been splitted into two parts:
 
 ### Part 1: Development
 
