@@ -1,4 +1,4 @@
-## Scoring model implementation - Backend
+## Scoring model implementation for credit attributions
 
 **Credit Scoring** is a risk analysis tool for granting credit. Based on statistical methods, it takes into account a lot of information relating to the loan applicant to assess the risk of non-repayment. In concrete terms, the tool assigns a score to a loan application by statistical analysis on a reference basis (expired files whose outcome is known).
 
@@ -66,6 +66,8 @@ The first part of the project consists of realizing:
 - simulation of data drift to determine a maintenance period in order to maintain optimal prediction performance.
 - the development of the web application which is divided into 2 sub-parts: one frontend based on streamlit (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Frontend.git) and the other backend based on Flask (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Backend.git).
 
+NB: The fifth first points are realized in successive notebooks noted from N1 to N5.
+
 ### Part 2: Deployment
 
 **Local**
@@ -76,11 +78,41 @@ To launch the application locally, just run:
 
 **On line**
 
-The deployment of the script is carried out via the Heroku platform. The application dashboard can be loaded with the following link: https://mysterious-refuge-87297.herokuapp.com
+The deployment of the script is carried out via the Heroku platform. The application dashboard can be loaded with the following link: https://mpacaud-oc-ds-p7-app-frontend.herokuapp.com
 
-NB1: By clicking on this link, it is possible to log into the backend server: https://hidden-savannah-70356.herokuapp.com
+NB1: By clicking on this link, it is possible to log into the backend server: https://mpacaud-oc-ds-p7-app-backend.herokuapp.com
 NB2: It seems that the Flask application cannot work on Azure because a package is missing on their linux installation to run the chosen model (LightGBM).
+
+
+## Folder architecture
+
+### Root
+
+#### Files
+
+- app.py: Flask API (backend part of the application).
+- dashboard_streamlit: Interactive dashboard (frontend part of the application) configured to look for the Flask API on lan.
+- All notebooks: Each development part.
+- Requirements.txt: Environment packages used.
+- test_\*: Unitary tests of both parts of the application (front and backend).
+- urls: on-lan and on-line urls of the Flask API.
+
+#### Folders
+
+- mlruns: Centralized experiments' results and models.
+- Exports:
+	- Data drift: All concerning the data drift anaylisis with Evidently report table.
+	- Feature_interpreation: All concerning model interpretability with SHAP.
+	- Figures: Exported figures from the different notebooks.
+	- Models: All models tried with different methods and hyperparameters optimization history.
+	- Preprocessed_data: Data used by models adter their preprocessing within the notebook (N2) feature engineering.
+
 
 ## Further Notes
 
 For reasons of server resource management, it is possible that the application is not permanently maintained on the Heroku hosting site.
+In order to remain under the 100 Mo file size limitation of GitHub the following minor files have not been uploaded:
+   - mlruns
+   - "\Exports\Feature_interpretation\SHAP\global_shap_explanations.pkl"
+   - "\Exports\Models\Tried\" (except for models_info.csv which sums up tried models results).
+   - "\Exports\Preprocessed_data"

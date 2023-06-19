@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 
 # Import custom functions.
-from shared_functions import interpretability_shap, obj_to_txt
+from shared_functions import interpretability_shap, interpretability_shap_prod, obj_to_txt
 
 
 
@@ -34,6 +34,7 @@ MODEL_DIR_PATH = r'Exports/Models/Selected'
 SHAP_INTERPRETATIONS_DIR_PATH = r'Exports/Feature_interpretation/SHAP'
 
 PKL_MODEL_FILE = 'selected_model.pkl'
+SHAP_EXPLAINER_FILE = 'explainer_shap.pkl'
 
 
 
@@ -43,12 +44,16 @@ PKL_MODEL_FILE = 'selected_model.pkl'
 # Load the optimized and trained model.
 MODEL_PL = pickle.load(open(os.path.join(MODEL_DIR_PATH, PKL_MODEL_FILE), "rb"))
 
+# Load the SHAP explainer.
+SHAP_EXPLAINER = pickle.load(open(os.path.join(SHAP_INTERPRETATIONS_DIR_PATH, SHAP_EXPLAINER_FILE), "rb"))
+
 # Load the relevant datasets.
-df_TRAIN = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_train.csv'))
-df_TEST = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_customers.csv'))
+#df_TRAIN = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_train.csv'))
+#df_TEST = pd.read_csv(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_customers.csv'))
+df_TEST = pd.read_pickle(os.path.join(IMPORTS_DIR_PATH, 'preprocessed_data_new_customers.pkl'))
 
 # Set the customer IDs column's values as the dataframe indeces.
-X_TRAIN = df_TRAIN.set_index('SK_ID_CURR')
+#X_TRAIN = df_TRAIN.set_index('SK_ID_CURR')
 X_TEST = df_TEST.set_index('SK_ID_CURR')
 
 
@@ -85,7 +90,7 @@ def shap_interpretations (customer_id, cat_class = 0):
     model = MODEL_PL['model']
 
     # Drop the target column in X_TRAIN.
-    X_train = X_TRAIN.drop('TARGET', axis=1)
+    #X_train = X_TRAIN.drop('TARGET', axis=1)
 
     # Shap explanations.
     if customer_id == 0: # Global.
@@ -98,14 +103,13 @@ def shap_interpretations (customer_id, cat_class = 0):
             explanations = pickle.load(explanations_global_file)
 
     else: # Local.
-        explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST.loc[[customer_id]], cat_class)
-       
+        #explanations, _ = interpretability_shap(model, scaler, X_train, X_TEST.loc[[customer_id]], cat_class)
+        explanations = interpretability_shap_prod(X_TEST.loc[[customer_id]], scaler, SHAP_EXPLAINER, cat_class)
+
     # Serialization of the shap explanations object as a string to allow its transfer across APIs.
     # NB: Step required because impossible to jsonify otherwise.
     explanations_serialized = obj_to_txt(explanations)
-    
-    print(type(explanations))
-    
+
     return explanations_serialized #{'status': 'ok', 'explanations': explanations} #[explanations] #json.dumps(explanations, cls=to_json)
 
 

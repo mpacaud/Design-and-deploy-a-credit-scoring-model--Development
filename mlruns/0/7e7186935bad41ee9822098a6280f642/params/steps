@@ -1,2 +1,0 @@
-[['model', RandomForestClassifier(class_weight='balanced', max_depth=10, max_features=None,
-                       min_samples_split=90, n_estimators=29)]]

@@ -5,13 +5,13 @@
 # # Notebook - Shared Functions
 
 # <h1>Table of Contents<span class="tocSkip"></span></h1>
-# <div class="toc"><ul class="toc-item"><li><span><a href="#Projet-7---Implementation-of-a-scoring-model" data-toc-modified-id="Projet-7---Implementation-of-a-scoring-model-1">Projet 7 - Implementation of a scoring model</a></span></li><li><span><a href="#Notebook---Shared-Functions" data-toc-modified-id="Notebook---Shared-Functions-2">Notebook - Shared Functions</a></span></li><li><span><a href="#I)-Importations-and-global-settings" data-toc-modified-id="I)-Importations-and-global-settings-3">I) Importations and global settings</a></span><ul class="toc-item"><li><span><a href="#1)-Importation-of-required-libraries" data-toc-modified-id="1)-Importation-of-required-libraries-3.1">1) Importation of required libraries</a></span></li><li><span><a href="#2)-Settings-of-global-graphics-parameters" data-toc-modified-id="2)-Settings-of-global-graphics-parameters-3.2">2) Settings of global graphics parameters</a></span></li><li><span><a href="#3)-Global-files'-path" data-toc-modified-id="3)-Global-files'-path-3.3">3) Global files' path</a></span></li></ul></li><li><span><a href="#II)-Functions" data-toc-modified-id="II)-Functions-4">II) Functions</a></span><ul class="toc-item"><li><span><a href="#1)-Basics" data-toc-modified-id="1)-Basics-4.1">1) Basics</a></span></li><li><span><a href="#2)-Dataframes-optimization" data-toc-modified-id="2)-Dataframes-optimization-4.2">2) Dataframes optimization</a></span></li><li><span><a href="#3)-Model-fitting-and-predictions" data-toc-modified-id="3)-Model-fitting-and-predictions-4.3">3) Model fitting and predictions</a></span></li><li><span><a href="#4)-Optimization-of-the-probability-threshold" data-toc-modified-id="4)-Optimization-of-the-probability-threshold-4.4">4) Optimization of the probability threshold</a></span></li><li><span><a href="#5)-AUROC" data-toc-modified-id="5)-AUROC-4.5">5) AUROC</a></span></li><li><span><a href="#6)-F-bêta-score" data-toc-modified-id="6)-F-bêta-score-4.6">6) F-bêta score</a></span></li><li><span><a href="#7)-Confusion-matrix" data-toc-modified-id="7)-Confusion-matrix-4.7">7) Confusion matrix</a></span></li><li><span><a href="#8)-Job-score" data-toc-modified-id="8)-Job-score-4.8">8) Job score</a></span></li><li><span><a href="#9)-MLFlow-Tracker" data-toc-modified-id="9)-MLFlow-Tracker-4.9">9) MLFlow Tracker</a></span></li><li><span><a href="#10)-Table-to-store-all-models'-relevant-values-along-notebooks" data-toc-modified-id="10)-Table-to-store-all-models'-relevant-values-along-notebooks-4.10">10) Table to store all models' relevant values along notebooks</a></span></li><li><span><a href="#11)-SHAP" data-toc-modified-id="11)-SHAP-4.11">11) SHAP</a></span></li><li><span><a href="#12)-Any-python-object-serialization-to-string-and-deserialization" data-toc-modified-id="12)-Any-python-object-serialization-to-string-and-deserialization-4.12">12) Any python object serialization to string and deserialization</a></span></li></ul></li></ul></div>
+# <div class="toc"><ul class="toc-item"><li><span><a href="#Projet-7---Implementation-of-a-scoring-model" data-toc-modified-id="Projet-7---Implementation-of-a-scoring-model-1">Projet 7 - Implementation of a scoring model</a></span></li><li><span><a href="#Notebook---Shared-Functions" data-toc-modified-id="Notebook---Shared-Functions-2">Notebook - Shared Functions</a></span></li><li><span><a href="#I)-Importations-and-global-settings" data-toc-modified-id="I)-Importations-and-global-settings-3">I) Importations and global settings</a></span><ul class="toc-item"><li><span><a href="#1)-Importation-of-required-libraries" data-toc-modified-id="1)-Importation-of-required-libraries-3.1">1) Importation of required libraries</a></span></li><li><span><a href="#2)-Settings-of-global-graphics-parameters" data-toc-modified-id="2)-Settings-of-global-graphics-parameters-3.2">2) Settings of global graphics parameters</a></span></li><li><span><a href="#3)-Global-files'-path" data-toc-modified-id="3)-Global-files'-path-3.3">3) Global files' path</a></span></li></ul></li><li><span><a href="#II)-Functions" data-toc-modified-id="II)-Functions-4">II) Functions</a></span><ul class="toc-item"><li><span><a href="#1)-Basics" data-toc-modified-id="1)-Basics-4.1">1) Basics</a></span></li><li><span><a href="#2)-Dataframes-optimization" data-toc-modified-id="2)-Dataframes-optimization-4.2">2) Dataframes optimization</a></span></li><li><span><a href="#3)-Model-fitting-and-predictions" data-toc-modified-id="3)-Model-fitting-and-predictions-4.3">3) Model fitting and predictions</a></span></li><li><span><a href="#4)-Optimization-of-the-probability-threshold" data-toc-modified-id="4)-Optimization-of-the-probability-threshold-4.4">4) Optimization of the probability threshold</a></span></li><li><span><a href="#5)-Theoritical-number-of-FP-(<=>-Reverse-of-the-job-score-in-absolute-values)" data-toc-modified-id="5)-Theoritical-number-of-FP-(<=>-Reverse-of-the-job-score-in-absolute-values)-4.5">5) Theoritical number of FP (&lt;=&gt; Reverse of the job score in absolute values)</a></span></li><li><span><a href="#6)-AUROC" data-toc-modified-id="6)-AUROC-4.6">6) AUROC</a></span></li><li><span><a href="#7)-F-bêta-score" data-toc-modified-id="7)-F-bêta-score-4.7">7) F-bêta score</a></span></li><li><span><a href="#8)-Confusion-matrix" data-toc-modified-id="8)-Confusion-matrix-4.8">8) Confusion matrix</a></span></li><li><span><a href="#9)-Classification-indicators" data-toc-modified-id="9)-Classification-indicators-4.9">9) Classification indicators</a></span></li><li><span><a href="#10)-Job-score" data-toc-modified-id="10)-Job-score-4.10">10) Job score</a></span></li><li><span><a href="#11)-MLFlow-Tracker" data-toc-modified-id="11)-MLFlow-Tracker-4.11">11) MLFlow Tracker</a></span></li><li><span><a href="#12)-Table-to-store-all-models'-relevant-values-along-notebooks" data-toc-modified-id="12)-Table-to-store-all-models'-relevant-values-along-notebooks-4.12">12) Table to store all models' relevant values along notebooks</a></span></li><li><span><a href="#13)-SHAP" data-toc-modified-id="13)-SHAP-4.13">13) SHAP</a></span></li><li><span><a href="#14)-Any-python-object-serialization-to-string-and-deserialization" data-toc-modified-id="14)-Any-python-object-serialization-to-string-and-deserialization-4.14">14) Any python object serialization to string and deserialization</a></span></li></ul></li></ul></div>
 
 # # I) Importations and global settings
 
 # ## 1) Importation of required libraries
 
-# In[28]:
+# In[1]:
 
 
 ### File management ###
@@ -122,7 +122,7 @@ import shap
 #EXPORTS_DIR_PATH = 'Exports'
 EXPORTS_MODELS_DIR_PATH = r'Exports\Models\Tried'
 IMPORTS_DIR_PATH = r'Exports\Preprocessed_data'
-MLFLOW_EXPORTS_MODELS_DIR_PATH = r'Exports\Models\Tried\MLFlow'
+MLFLOW_EXPORTS_MODEL_DIR_PATH = r'Exports\Models\Tried\MLFlow'
 
 CSV_MODELS_FILE = 'models_info.csv'
 PKL_MODELS_FILE = 'models_info.pkl'
@@ -202,7 +202,7 @@ def reduce_memory (df):
         if col_type != object:
             cmin = df[col].min()
             cmax = df[col].max()
-            if str(col_type)[:3] == 'int':
+            if str(col_type)[:3] in ['Int', 'int']:
                 # Can use unsigned int here too
                 if cmin > np.iinfo(np.int8).min and cmax < np.iinfo(np.int8).max:
                     df[col] = df[col].astype(np.int8)
@@ -284,7 +284,7 @@ def model_fit_predict (model, X, y, cv, X_test=None):
 # In[9]:
 
 
-def get_y_pred_list (y_pred_proba_P, l_proba_thrs = np.linspace(0, 1, num=100)):
+def get_y_pred_list (y_pred_proba_P, l_proba_thrs = np.linspace(0, 1, num=101)):
     
     """ Classify all customers of the sample for each probability threshold. """
     
@@ -397,11 +397,11 @@ def figure_density (y_true, y_pred_proba_P, best_thr, return_fig = False):
     # Plot the probability density approximation of the TN.
     if return_fig:
         #plt.hist(y_pred_proba_P[y_true_N.index], bins=100, density=True)
-        kde_N = ax.kdeplot(y_pred_proba_P[y_true_N.index], fill=True, alpha=0.5, edgecolor='k') #multiple="stack"
+        kde_N = sns.kdeplot(y_pred_proba_P[y_true_N.index], ax=ax, fill=True, alpha=0.5, edgecolor='k') #multiple="stack"
 
         # Plot the probability density approximation of the FN.
         #plt.hist(y_pred_proba_P[y_true_P.index], bins=100, density=True)
-        ax.kdeplot(y_pred_proba_P[y_true_P.index], fill=True, alpha=0.5, edgecolor='k')
+        sns.kdeplot(y_pred_proba_P[y_true_P.index], ax=ax, fill=True, alpha=0.5, edgecolor='k')
     else:
         kde_N = sns.kdeplot(y_pred_proba_P[y_true_N.index], fill=True, alpha=0.5, edgecolor='k') #multiple="stack"
 
@@ -421,10 +421,13 @@ def figure_density (y_true, y_pred_proba_P, best_thr, return_fig = False):
         return fig
 
 
+# ## 5) Theoritical number of FP (<=> Reverse of the job score in absolute values)
+
 # In[13]:
 
 
-def figure_sum_fp_coeff_fn (np_fp, np_fn, l_proba_thrs, best_thr, fn_cost_coeff = 10, return_fig = False):
+def figure_sum_fp_coeff_fn (np_fp, np_fn, l_proba_thrs, best_thr, fn_cost_coeff = 10,
+                            return_fig = False, thr_line_vis = True, model_label = None):
     
     """ 
     According to the coefficients set (FN = 10 x FP) calculate the theorical corresponding total number of
@@ -442,29 +445,32 @@ def figure_sum_fp_coeff_fn (np_fp, np_fn, l_proba_thrs, best_thr, fn_cost_coeff 
         fig, ax = plt.subplots(1)
         
         # Plot the corresponding curve.
-        ax.plot(l_proba_thrs, np_fp_hypothesis)
+        ax.plot(l_proba_thrs, np_fp_hypothesis, label=model_label)
      
         # Plot a line at the best threshold found.
-        ax.vlines(best_thr, ymin=0, ymax=max(np_fp_hypothesis), colors='k', linestyles='--')
+        ax.vlines(best_thr, ymin=0, ymax=max(np_fp_hypothesis), colors='k', linestyles='--', visible=thr_line_vis)
             
     else:
         
         # Plot the corresponding curve.
-        plt.plot(l_proba_thrs, np_fp_hypothesis)
+        plt.plot(l_proba_thrs, np_fp_hypothesis, label=model_label)
      
         # Plot a line at the best threshold found.
-        plt.vlines(best_thr, ymin=0, ymax=max(np_fp_hypothesis), colors='k', linestyles='--')
+        plt.vlines(best_thr, ymin=0, ymax=max(np_fp_hypothesis), colors='k', linestyles='--', visible=thr_line_vis)
         
+    print(model_label)
+    
     # Set other figures' parameters.
     plt.title("Total number of theorical FP function of probability thresholds")
     plt.xlabel("Probability thresholds")
     plt.ylabel("Total false positives")
+    plt.legend()
     
     if return_fig:
         return fig
 
 
-# ## 5) AUROC
+# ## 6) AUROC
 
 # In[14]:
 
@@ -515,7 +521,7 @@ def figure_roc (y_true, l_yhats, l_model_labels, return_fig = False):
         return fig
 
 
-# ## 6) F-bêta score
+# ## 7) F-bêta score
 
 # In[15]:
 
@@ -534,7 +540,7 @@ def get_fbeta_score (l_proba_thrs, l_fbeta, beta, best_thr, best_thr_idx):
 # In[16]:
 
 
-def figure_fbeta_score (l_proba_thrs, l_fbeta, best_thr, return_fig = False):
+def figure_fbeta_score (l_proba_thrs, l_fbeta, best_thr, model_label=None, return_fig = False):
     
     """ Draw the F-Bêta score figure for all probability thresholds tried. """
     
@@ -544,9 +550,9 @@ def figure_fbeta_score (l_proba_thrs, l_fbeta, best_thr, return_fig = False):
         
     # Plot the graph.
     if return_fig:
-        ax.plot(l_proba_thrs, l_fbeta)
+        ax.plot(l_proba_thrs, l_fbeta, label=model_label)
     else:
-        plt.plot(l_proba_thrs, l_fbeta)
+        plt.plot(l_proba_thrs, l_fbeta, label=model_label)
     
     # Plot a line at the best threshold found.
     plt.vlines(best_thr, ymin=0, ymax=max(l_fbeta), colors='k', linestyles='--')
@@ -555,12 +561,13 @@ def figure_fbeta_score (l_proba_thrs, l_fbeta, best_thr, return_fig = False):
     plt.title('F-Bêta score = f(Probability thresholds)')
     plt.xlabel('Probability thresholds')
     plt.ylabel('F-Bêta score')
+    plt.legend()
     
     if return_fig:
         return fig
 
 
-# ## 7) Confusion matrix
+# ## 8) Confusion matrix
 
 # In[17]:
 
@@ -593,14 +600,30 @@ def figure_confusion_matrix (y_true, y_pred):
     display(df)
 
 
-# ## 8) Job score
+# ## 9) Classification indicators
 
 # In[18]:
 
 
+def calc_indicators (tp_fp_fn_tn):
+    
+    """ Calculate the classification indicators of: sensitivity, specificity, accuracy. """
+    
+    sensitivity = tp_fp_fn_tn[0] / (tp_fp_fn_tn[0] + tp_fp_fn_tn[2])
+    specificity = tp_fp_fn_tn[3] / (tp_fp_fn_tn[3] + tp_fp_fn_tn[1])
+    accuracy = (tp_fp_fn_tn[0] + tp_fp_fn_tn[3]) / np.sum(tp_fp_fn_tn)
+    
+    return [sensitivity, specificity, accuracy]
+
+
+# ## 10) Job score
+
+# In[19]:
+
+
 def gain_norm (y_true, y_pred, fn_coeff = -10, fp_coeff = -1, tp_coeff = 0, tn_coeff = 0):
 
-    """ Calculate the job score which will be the main score used to measure models performances. """
+    """ Calculate and normalizes the job score which will be the main score used to measure models performances. """
 
     # Get the confusion matrix coeffs.
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
@@ -610,15 +633,129 @@ def gain_norm (y_true, y_pred, fn_coeff = -10, fp_coeff = -1, tp_coeff = 0, tn_c
     
     # Maximum gain.
     g_max = tn_coeff*(fp + tn) + tp_coeff*(fn + tp)
+    
     # Minimum gain.
     g_min = fp_coeff*(fp + tn) + fn_coeff*(fn + tp)
+    
     # Normalized gain (MinMax).
     g_norm = (g - g_min) / (g_max - g_min)
 
     return g_norm
 
 
-# In[19]:
+# In[20]:
+
+
+def figure_job_score_curve (y_true, yhat_P, model_label, thr_line_vis = True, return_fig = False):
+    
+    """ Plot the job score curve function of a range of thresholds. """
+    
+    ### Configuration variables ###
+    
+    # Set the probability threshold range to try.
+    l_proba_thrs = np.linspace(0, 1, num=101)
+    
+    # Get all set of predictions for each threshold.
+    l_y_pred = get_y_pred_list(yhat_P)
+    
+    # Get the confusion matrix results for each set of predictions.
+    np_tp, np_fp, np_fn, np_tn = np.array(get_tp_fp_fn_tn_lists(y_true, l_y_pred))
+    
+    # Calculate the optimal threshold.
+    best_thr, best_thr_idx = opt_proba_thr(np_tp, np_fp, np_fn, np_tn, l_proba_thrs) 
+    
+    
+    ### Caclculate the job score for each threshold within the set range ###
+    
+    l_g_norm = []
+    for y_pred in l_y_pred:
+        
+        # Calculate the job score.
+        g_norm = gain_norm(y_true, y_pred, fn_coeff=-10, fp_coeff=-1, tp_coeff=0, tn_coeff=0)
+        
+        # List of job scores.
+        l_g_norm.append(g_norm)
+
+    
+    ### Plot and configure the figure ###
+        
+    if return_fig:
+        
+        # Create a matplotlib figure object.
+        fig, ax = plt.subplots(1)
+        
+        # Plot the corresponding curve.
+        ax.plot(l_proba_thrs, l_g_norm, label=model_label)
+     
+        # Plot a line at the best threshold found.
+        ax.vlines(best_thr, ymin=0, ymax=max(l_g_norm), colors='k', linestyles='--', visible=thr_line_vis)
+            
+    else:
+        
+        # Plot the corresponding curve.
+        plt.plot(l_proba_thrs, l_g_norm, label=model_label)
+     
+        # Plot a line at the best threshold found.
+        plt.vlines(best_thr, ymin=0, ymax=max(l_g_norm), colors='k', linestyles='--', visible=thr_line_vis)
+        
+        
+    # Set axis labels and the title.
+    plt.xlabel("Classification threshold")
+    plt.ylabel("Job score")
+    plt.title("Job score")
+    
+    # Show the legend.
+    plt.legend()
+    
+    if return_fig:
+        return fig
+
+
+# In[21]:
+
+
+def scorer_fct (y_true, y_pred_proba_P, scorer = 'g_norm', verbose = True):
+    
+    """ Job scorer of scikit-learn. """
+    
+    # Set the probability threshold range to try.
+    l_proba_thrs = np.linspace(0, 1, num=101)
+    
+    # Get all set of predictions for each threshold.
+    l_y_pred = get_y_pred_list(y_pred_proba_P)
+    
+    # Get the confusion matrix results for each set of predictions.
+    np_tp, np_fp, np_fn, np_tn = np.array(get_tp_fp_fn_tn_lists(y_true, l_y_pred))
+    
+    # Get the best threshold and its corresponding index with the list of the predictions sets.
+    best_thr, idx = opt_proba_thr(np_tp, np_fp, np_fn, np_tn, l_proba_thrs, fn_cost_coeff = 10)
+    best_thr = round(best_thr, 2)
+
+    # Select the prediction set corresponding to the best threshold found.
+    y_pred = l_y_pred[idx+1]
+
+    
+    # Select the scorer to use.
+    if scorer == 'g_norm':
+        # Calculate the normalized gain.
+        score = gain_norm(y_true, y_pred, fn_coeff=-10, fp_coeff=-1, tp_coeff=0, tn_coeff=0)
+        print(score)
+    elif scorer == 'auroc':
+        score = roc_auc_score(y_true, y_pred)
+    elif scorer == 'fbeta':
+        score = f_beta_score(y_true, y_pred, beta=3)
+        
+    
+    if verbose:
+        print('Best probability threshold:', best_thr)
+
+    return score
+
+# Make the function as a new scorer for sklearn.
+g_norm_scorer = make_scorer(scorer_fct, scorer='g_norm', verbose=False)
+
+
+# In[22]:
 
 
 def scorer_w_thr_fct (y_true, y_pred_proba_P, scorer = 'g_norm', verbose = True):
@@ -661,53 +798,9 @@ def scorer_w_thr_fct (y_true, y_pred_proba_P, scorer = 'g_norm', verbose = True)
 g_norm_scorer_w_thr = make_scorer(scorer_w_thr_fct, scorer = 'g_norm', verbose=False)#, needs_proba=True)
 
 
-# In[20]:
+# ## 11) MLFlow Tracker
 
-
-def scorer_fct (y_true, y_pred_proba_P, scorer = 'g_norm', verbose = True):
-    
-    """ Function which make the scorer take into account the best probability threshold found for the current set of hyperparameters. """
-    
-    # Set the probability threshold range to try.
-    l_proba_thrs = np.linspace(0, 1, num=101)
-    
-    # Get all set of predictions for each threshold.
-    l_y_pred = get_y_pred_list(y_pred_proba_P)
-    
-    # Get the confusion matrix results for each set of predictions.
-    np_tp, np_fp, np_fn, np_tn = np.array(get_tp_fp_fn_tn_lists(y_true, l_y_pred))
-    
-    # Get the best threshold and its corresponding index with the list of the predictions sets.
-    best_thr, idx = opt_proba_thr(np_tp, np_fp, np_fn, np_tn, l_proba_thrs, fn_cost_coeff = 10)
-    best_thr = round(best_thr, 2)
-
-    # Select the prediction set corresponding to the best threshold found.
-    y_pred = l_y_pred[idx+1]
-
-    
-    # Select the scorer to use.
-    if scorer == 'g_norm':
-        # Calculate the normalized gain.
-        score = gain_norm(y_true, y_pred, fn_coeff=-10, fp_coeff=-1, tp_coeff=0, tn_coeff=0)
-        print(score)
-    elif scorer == 'auroc':
-        score = roc_auc_score(y_true, y_pred)
-    elif scorer == 'fbeta':
-        score = f_beta_score(y_true, y_pred, beta=3)
-        
-    
-    if verbose:
-        print('Best probability threshold:', best_thr)
-
-    return score
-
-# Make the function as a new scorer for sklearn.
-g_norm_scorer = make_scorer(scorer_fct, scorer='g_norm', verbose=False)
-
-
-# ## 9) MLFlow Tracker
-
-# In[21]:
+# In[23]:
 
 
 def mlflow_experiment_tracker (model_pl, df, model_label, X, y, l_tracked_vars = [],
@@ -790,14 +883,18 @@ def mlflow_experiment_tracker (model_pl, df, model_label, X, y, l_tracked_vars =
         mlflow.log_metric("FP", l_tracked_vars[8][1])
         mlflow.log_metric("FN", l_tracked_vars[8][2])
         mlflow.log_metric("TN", l_tracked_vars[8][3])
+        mlflow.log_metric("Sensitivity", l_tracked_vars[9][0])
+        mlflow.log_metric("Specificity", l_tracked_vars[9][1])
+        mlflow.log_metric("Accuracy", l_tracked_vars[9][2])
         
         # log figures.
         mlflow.log_figure(figure_roc(y, [l_tracked_vars[2]], [model_label], return_fig=True), "ROC+AUC.png") # AUROC.
         plt.close() # Prevent the figure to show in the notebook.
-        mlflow.log_figure(figure_sum_fp_coeff_fn(np_fp, np_fn, l_proba_thrs, l_tracked_vars[3], fn_cost_coeff=10, return_fig=True), "Inversed_job_score_curve.png") # Inversed gain.
+        #mlflow.log_figure(figure_sum_fp_coeff_fn(np_fp, np_fn, l_proba_thrs, l_tracked_vars[3], fn_cost_coeff=10, return_fig=True), "Inversed_job_score_curve.png") # Inversed gain.
+        mlflow.log_figure(figure_sum_fp_coeff_fn(np_fp, np_fn, l_proba_thrs, l_tracked_vars[3], fn_cost_coeff=10, return_fig=True), "job_score_curve.png")
         plt.close()
-        #mlflow.log_figure(figure_density(y, l_tracked_vars[2], l_tracked_vars[3], return_fig=True), "Proba_density.png") # Probability density.
-        #plt.close()
+        mlflow.log_figure(figure_density(y, l_tracked_vars[2], l_tracked_vars[3], return_fig=True), "Proba_density.png") # Probability density.
+        plt.close()
         mlflow.log_figure(figure_fbeta_score(l_proba_thrs, l_fbeta, l_tracked_vars[3], return_fig=True), "Fbeta.png")
         plt.close()
         
@@ -805,13 +902,13 @@ def mlflow_experiment_tracker (model_pl, df, model_label, X, y, l_tracked_vars =
     ### [Test] Save also the model alone with MLFlow ###
     # NB: Cannot overwrite an existing file.
     try:
-        mlflow.sklearn.save_model(model_pl, MLFLOW_EXPORTS_MODELS_DIR_PATH + "_" + model_label)
+        mlflow.sklearn.save_model(model_pl, MLFLOW_EXPORTS_MODEL_DIR_PATH + "_" + model_label)
     except:
         print("A folder with this name already exist.")
         print("Changing the storage folder name...")
         print()
         for i in range(100):
-            change_folder_name = MLFLOW_EXPORTS_MODELS_DIR_PATH + "_" + model_label + "_" + str(i)
+            change_folder_name = MLFLOW_EXPORTS_MODEL_DIR_PATH + "_" + model_label + "_" + str(i)
             try:
                 mlflow.sklearn.save_model(model_pl, change_folder_name)
             except:
@@ -834,9 +931,9 @@ def mlflow_experiment_tracker (model_pl, df, model_label, X, y, l_tracked_vars =
     print("\n" + "-" * 100 + "\n")
 
 
-# ## 10) Table to store all models' relevant values along notebooks
+# ## 12) Table to store all models' relevant values along notebooks
 
-# In[22]:
+# In[24]:
 
 
 def summarizing_table (df, l_vars, eval_dataset, l_col_labels):
@@ -852,10 +949,13 @@ def summarizing_table (df, l_vars, eval_dataset, l_col_labels):
     rocauc_train_key, rocauc_test_key, \
     fbeta_train_key, fbeta_test_key, \
     process_time_train_key, process_time_test_key, \
-    cm_vals_train_key, cm_vals_test_key = l_col_labels
+    cm_vals_train_key, cm_vals_test_key, \
+    sensitivity_train_key, sensitivity_test_key, \
+    specificity_train_key, specificity_test_key, \
+    accuracy_train_key, accuracy_test_key = l_col_labels
     
     # Values.
-    model_label, model, yhat, best_thr, g_norm, rocauc, fbeta, process_time, cm_vals = l_vars
+    model_label, model, yhat, best_thr, g_norm, rocauc, fbeta, process_time, l_cm_vals, l_indicators = l_vars
 
     
     ### Select if the values corresponds to the validation set or the test set ###
@@ -866,7 +966,10 @@ def summarizing_table (df, l_vars, eval_dataset, l_col_labels):
                     rocauc_train_key: rocauc,
                     fbeta_train_key: fbeta,
                     process_time_train_key: process_time,
-                    cm_vals_train_key: cm_vals
+                    cm_vals_train_key: l_cm_vals,
+                    sensitivity_train_key: l_indicators[0],
+                    specificity_train_key: l_indicators[1],
+                    accuracy_train_key: l_indicators[2]                   
                    }
 
     else: # test_set
@@ -876,7 +979,10 @@ def summarizing_table (df, l_vars, eval_dataset, l_col_labels):
                     rocauc_test_key: rocauc,
                     fbeta_test_key: fbeta,
                     process_time_test_key: process_time,
-                    cm_vals_test_key: cm_vals
+                    cm_vals_test_key: l_cm_vals,
+                    sensitivity_test_key: l_indicators[0],
+                    specificity_test_key: l_indicators[1],
+                    accuracy_test_key: l_indicators[2]
                    }
     
     dict_model = {model_label_key: model_label, model_key: model}
@@ -900,7 +1006,7 @@ def summarizing_table (df, l_vars, eval_dataset, l_col_labels):
     return df
 
 
-# In[23]:
+# In[25]:
 
 
 def update_sum_table (df, l_vars, get_csv_file, eval_dataset, main_scorer_val, l_col_labels = ['col0'],
@@ -960,9 +1066,9 @@ def update_sum_table (df, l_vars, get_csv_file, eval_dataset, main_scorer_val, l
     return df
 
 
-# ## 11) SHAP
+# ## 13) SHAP
 
-# In[24]:
+# In[26]:
 
 
 # NB: [OBSOLET] because of the shap.TreeExplainer()'s parameter model_output='probability' which convert raw shap values as 
@@ -1009,12 +1115,12 @@ def logodd_to_odd (explanations, yhat, cat_class):
     return explanations_transformed    
 
 
-# In[25]:
+# In[27]:
 
 
 def interpretability_shap (model, scaler, X_train, X_test, cat_class = 0): #customer_idx = None
       
-    """ Get the SHAP values in their odd form. """
+    """ Get the SHAP values in their odd form with training of the explainer. """
         
     # Scale the train and the test set to fit the model pipeline inputs format.
     X_train_norm = scaler.transform(X_train)
@@ -1047,15 +1153,57 @@ def interpretability_shap (model, scaler, X_train, X_test, cat_class = 0): #cust
 
     # Measure the process time duration.
     delta_t = time() - t0
+    
+    return explanations, delta_t, explainer_shap
 
-    return explanations, delta_t
+
+# In[28]:
 
 
-# ## 12) Any python object serialization to string and deserialization
+def interpretability_shap_prod (X_test, scaler, explainer_shap, cat_class = 0):
+    
+    """ Get the SHAP values in their odd form without training the explainer. """
+        
+    # Scale the train and the test set to fit the model pipeline inputs format.
+    #X_train_norm = scaler.transform(X_train)
+    X_test_norm = scaler.transform(X_test)
+    
+    # Convert the numpy array X_test to a dataframe to associate the columns' labels to their corresponding values.
+    # NB: This is required for some shap graphic which cannot get the columns' labels otherwise.
+    X_test_norm = pd.DataFrame(X_test_norm, columns=X_test.columns)
+    
+    # Select data to interpret as global or local.
+    #if customer_idx == None: # Global.
+        #pd.DataFrame(X_test_norm, columns=X_test.columns)
+    #else: # Local.
+        #X_test_norm = pd.DataFrame(X_test_norm[customer_idx].reshape(1,-1), columns=X_test.columns)
+    
+    # Initialize time to measure the process duration.
+    #t0 = time()
+
+    # Create the explainer model with TreeExplainer().
+    # NB: model_output='probability' allows to display shap values on the probability scale (odd).
+    #explainer_shap = shap.TreeExplainer(model, X_train_norm, model_output='probability')
+
+    # Get explanations (values = SHAP values, base_values = SHAP expected average values after its fit on X_train_norm, data = original data passed => X_test_norm).
+    explanations = explainer_shap(X_test_norm)
+    
+    # If the negative class is chosen so the SHAP's values gotten for the positive class (1) needs to be adapated.
+    if cat_class == 0:
+        explanations.values = - explanations.values
+        explanations.base_values = 1 - explanations.base_values
+
+    # Measure the process time duration.
+    #delta_t = time() - t0
+
+    return explanations
+
+
+# ## 14) Any python object serialization to string and deserialization
 # 
 # Very useful to transfer any python object in json format across APIs.
 
-# In[26]:
+# In[29]:
 
 
 def obj_to_txt (obj):
@@ -1069,7 +1217,7 @@ def obj_to_txt (obj):
     return txt
 
 
-# In[27]:
+# In[30]:
 
 
 def txt_to_obj (txt):
