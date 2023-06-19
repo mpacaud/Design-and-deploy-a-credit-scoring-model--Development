@@ -108,7 +108,7 @@ NB2: It seems that the Flask application cannot work on Azure because a package 
 	- Preprocessed_data: Data used by models adter their preprocessing within the notebook (N2) feature engineering.
 
 
-## Further Notes
+## Further notes
 
 For reasons of server resource management, it is possible that the application is not permanently maintained on the Heroku hosting site.
 In order to remain under the 100 Mo file size limitation of GitHub the following minor files have not been uploaded:
