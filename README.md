@@ -1,14 +1,20 @@
 # Design and deploy a credit scoring model
 
+
 ## Issues addressed by the project
 
-The project involves implementing a credit scoring tool to calculate the probability that a customer will be able to repay the credit they are applying for, and then use this information to grant or refuse their application. In addition, this project must also meet a growing demand from customers for transparency in credit granting decisions.
+The project involves implementing a **credit scoring** tool based on **Machine Learning** technologies and customer's informations to calculate the probability that he/she will be able to repay the credit they are applying for and help the company to decide to grant or refuse the application. In addition, this project must also meet a growing demand from customers for transparency in credit granting decisions.
+Machine Learning has the reputation of being not very transparent and rather considered as a black box which does not favor its acceptance either.
+
+>Nevertheless, enormous progress has been made to date and the field of Machine Learning offers very interesting solutions to improve the understanding of decision-making processes.
+
 
 ## Objectives
 
-   1. This tool should make it possible to define the probability of defaulting on a loan on the basis of information relating to the customer.
-   2. It must also offer a certain level of transparency and simplicity with regard to the data and its processing, with a view to implementing methods for interpreting the model in the form of an interactive dashboard for use by customer relationship managers and their customers.
-   3. A simulation of the data drift is also carried out with a view to determining a maintenance period to maintain optimum prediction performance.
+1. This tool should make it possible to define the probability of defaulting on a loan on the basis of information relating to the customer.
+2. It must also offer a certain level of transparency and simplicity concerning the data and its processing, with a view to implementing methods for interpreting the model in the form of an interactive dashboard for use by customer-relations managers and their customers.
+3. A simulation of the data drift is also carried out for the purpose of determining a maintenance period to maintain optimum prediction performances.
+
 
 ## The tool to develop
 
@@ -35,36 +41,7 @@ The techniques and methods used to build the model obviously have a significant 
 >The technical challenge is to minimize these cases.
 
 
-## Project
-
-This project aims to create a **Credit Scoring** tool based on **Machine Learning** technologies. Machine Learning has the reputation of being not very transparent and of approaching a black box. This does not favor its acceptance with regard to the first two points mentioned above.
-
->Nevertheless, enormous progress has been made to date and the field of Machine Learning offers very interesting solutions to improve the understanding of decision-making processes.
-
-
-**Modelisation**
-
-The objective is twofold:
-
-+ The model must allow to define the ***probability of default of a repayment*** of a credit on the basis of information relating to the customer.
-+ It must also offer a certain level of transparency concerning the data and their processing in order to implement methods of ***interpretability*** of the variables.
-
->The tool was modeled using **supervised learning** technologies.
-
-The main modeling steps are described in the methodological note:
-
-
-**Application**
-
-Beyond the technical aspects, the transparency of the tool is also characterized by the possibilities of interaction with it in order to carry out additional analyzes on the basis of the results proposed.
-
-+ For example, you want to be able to compare 2 similar files whose credit granting predictions are different and visualize the variables that influenced the decisions.
-+ You may also want to perform simulations to estimate the degree to which a file has been refused and identify the discriminating criteria.
-
->The model was deployed via a web application based on **Streamlit** and **Flask**.
-
-
-## Plan
+## Project architecture
 
 The project have been splitted into two parts:
 
@@ -76,7 +53,7 @@ The first part of the project consists of realizing:
 - the modeling of a supervised learning system.
 - the interpretation of the importance of features at local and global level.
 - simulation of data drift to determine a maintenance period in order to maintain optimal prediction performance.
-- the development of the web application which is divided into 2 sub-parts: one frontend based on streamlit (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Frontend.git) and the other backend based on Flask (stored on GitHub: https://github.com/mpacaud/Scoring_model_implementation-Backend.git).
+- the development of the web application which is divided into 2 sub-parts: one frontend based on streamlit (stored on GitHub: https://github.com/mpacaud/Design-and-deploy-a-credit-scoring-model--Frontend.git) and the other backend based on Flask (stored on GitHub: https://github.com/mpacaud/Design-and-deploy-a-credit-scoring-model--Backend.git).
 
 NB: The fifth first points are realized in successive notebooks noted from N1 to N5.
 
@@ -92,11 +69,12 @@ To launch the application locally, just run:
 
 The deployment of the script is carried out via the Heroku platform. The application dashboard can be loaded with the following link: https://mpacaud-oc-ds-p7-app-frontend.herokuapp.com
 
-NB1: By clicking on this link, it is possible to log into the backend server: https://mpacaud-oc-ds-p7-app-backend.herokuapp.com
-NB2: It seems that the Flask application cannot work on Azure because a package is missing on their linux installation to run the chosen model (LightGBM).
+*NB1: By clicking on this link, it is possible to log into the backend server: https://mpacaud-oc-ds-p7-app-backend.herokuapp.com*
+
+*NB2: It seems that the Flask application cannot work on Azure because a package is missing on their linux installation to run the chosen model (LightGBM).*
 
 
-## Folder architecture
+## Folder architecture of the repository
 
 ### Root
 
@@ -126,5 +104,5 @@ For reasons of server resource management, it is possible that the application i
 In order to remain under the 100 Mo file size limitation of GitHub the following minor files have not been uploaded:
   - mlruns
   - "\Exports\Feature_interpretation\SHAP\global_shap_explanations.pkl"
-  - "\Exports\Models\Tried\" (except for models_info.csv which sums up tried models results).
+  - "\Exports\Models\Tried" (only models trained on undersampled datasets)
   - "\Exports\Preprocessed_data"
