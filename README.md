@@ -1,4 +1,16 @@
-## Scoring model implementation for credit attributions
+# Design and deploy a credit scoring model
+
+## Issues addressed by the project
+
+The project involves implementing a credit scoring tool to calculate the probability that a customer will be able to repay the credit they are applying for, and then use this information to grant or refuse their application. In addition, this project must also meet a growing demand from customers for transparency in credit granting decisions.
+
+## Objectives
+
+   1. This tool should make it possible to define the probability of defaulting on a loan on the basis of information relating to the customer.
+   2. It must also offer a certain level of transparency and simplicity with regard to the data and its processing, with a view to implementing methods for interpreting the model in the form of an interactive dashboard for use by customer relationship managers and their customers.
+   3. A simulation of the data drift is also carried out with a view to determining a maintenance period to maintain optimum prediction performance.
+
+## The tool to develop
 
 **Credit Scoring** is a risk analysis tool for granting credit. Based on statistical methods, it takes into account a lot of information relating to the loan applicant to assess the risk of non-repayment. In concrete terms, the tool assigns a score to a loan application by statistical analysis on a reference basis (expired files whose outcome is known).
 
@@ -30,7 +42,7 @@ This project aims to create a **Credit Scoring** tool based on **Machine Learnin
 >Nevertheless, enormous progress has been made to date and the field of Machine Learning offers very interesting solutions to improve the understanding of decision-making processes.
 
 
-**Modelization**
+**Modelisation**
 
 The objective is twofold:
 
@@ -101,18 +113,18 @@ NB2: It seems that the Flask application cannot work on Azure because a package 
 
 - mlruns: Centralized experiments' results and models.
 - Exports:
-	- Data drift: All concerning the data drift anaylisis with Evidently report table.
-	- Feature_interpreation: All concerning model interpretability with SHAP.
-	- Figures: Exported figures from the different notebooks.
-	- Models: All models tried with different methods and hyperparameters optimization history.
-	- Preprocessed_data: Data used by models adter their preprocessing within the notebook (N2) feature engineering.
+  - Data drift: All concerning the data drift anaylisis with Evidently report table.
+  - Feature_interpretation: All concerning model interpretability with SHAP.
+  - Figures: Exported figures from the different notebooks.
+  - Models: All models tried with different methods and hyperparameters optimization history.
+  - Preprocessed_data: Data used by models adter their preprocessing within the notebook (N2) feature engineering.
 
 
 ## Further notes
 
 For reasons of server resource management, it is possible that the application is not permanently maintained on the Heroku hosting site.
 In order to remain under the 100 Mo file size limitation of GitHub the following minor files have not been uploaded:
-   - mlruns
-   - "\Exports\Feature_interpretation\SHAP\global_shap_explanations.pkl"
-   - "\Exports\Models\Tried\" (except for models_info.csv which sums up tried models results).
-   - "\Exports\Preprocessed_data"
+  - mlruns
+  - "\Exports\Feature_interpretation\SHAP\global_shap_explanations.pkl"
+  - "\Exports\Models\Tried\" (except for models_info.csv which sums up tried models results).
+  - "\Exports\Preprocessed_data"

@@ -152,12 +152,12 @@ st.markdown("<h2 style='text-align: center; color: black'> Recommendation & cust
 st.markdown("<h6 style='text-align: justify; color: black'> This section shows the recommendation and the customer's application\
             position among the average and the required standards.</h6>", unsafe_allow_html=True)
 
-    # Create the a selection button among customer IDs #
+    # Create the selection button among customer IDs #
 
 # Grid level 1: Set the grid in which place the selection button.
 col1, col2, _ = st.columns([1,3,1])
 
-# Place and create the a selection button between customers.
+# Place and create the selection button between customers.
 # NB: For RGPD: index = None => None as default customer ID.
 with col1:
     selected_customer_id = st.selectbox("Select customer ID", l_customer_id) # For a default value: index=<default_value_idx>
@@ -313,7 +313,7 @@ with col2:
     else:
         # Title and description of the figure.
         description = "This figure shows in which measure the values of a feature influence the feature in positive or negative way\
-                       to accept or deny an application by the model. In addition, it also give an idea about the customer's distribution\
+                       to accept or deny an application by the model. In addition, it also gives an idea about the customer's distribution\
                        within each feature."
         st.markdown("<h4 style='text-align: right; color: black;'> Values influence </h4>", unsafe_allow_html=True, help=description)
            
